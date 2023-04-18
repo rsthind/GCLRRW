@@ -23,6 +23,7 @@ def parse_args():
     parser.add_argument('--walk_len', default=4000, type=int, help='walk_length')
     parser.add_argument('--p', default=1.0, type=float, help='p for random walk')
     parser.add_argument('--q_val', default=1.0, type=float, help='q for random walk')
+    parser.add_argument('--restart', default=0.001, type=float, help='random walk restart probability random walk')
     return parser.parse_args()
 args = parse_args()
 

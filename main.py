@@ -42,7 +42,7 @@ p = args.p
 q = args.q_val
 
 # load data
-path = 'data/' + 'gowalla' + '/'
+path = 'data/' + args.data + '/'
 #path = '/'
 f = open(path+'trnMat.pkl','rb')
 train = pickle.load(f)
@@ -110,17 +110,6 @@ ret = ret.tocoo()
 ret_adj_norm = scipy_sparse_mat_to_torch_sparse_tensor(ret)
 ret_adj_norm = ret_adj_norm.coalesce().cuda(torch.device(device))
 print('Adj matrix normalized.')
-
-'''
-# perform svd reconstruction
-adj = scipy_sparse_mat_to_torch_sparse_tensor(train).coalesce().cuda(torch.device(device))
-print('Performing SVD...')
-svd_u,s,svd_v = torch.svd_lowrank(adj, q=svd_q)
-u_mul_s = svd_u @ (torch.diag(s))
-v_mul_s = svd_v @ (torch.diag(s))
-del s
-print('SVD done.')
-'''
 
 # process test set
 test_labels = [[] for i in range(test.shape[0])]

@@ -60,13 +60,6 @@ class LightGCL(nn.Module):
                 self.G_u_list[layer] = (torch.spmm(self.ret_adj_norm, self.G_i_list[layer-1]))
                 self.G_i_list[layer] = (torch.spmm(self.ret_adj_norm.transpose(0,1), self.G_u_list[layer-1]))
 
-                '''
-                # svd_adj propagation
-                vt_ei = self.vt @ self.E_i_list[layer-1]
-                self.G_u_list[layer] = (self.u_mul_s @ vt_ei)
-                ut_eu = self.ut @ self.E_u_list[layer-1]
-                self.G_i_list[layer] = (self.v_mul_s @ ut_eu)
-                '''
 
             self.G_u = sum(self.G_u_list)
             self.G_i = sum(self.G_i_list)
