@@ -17,13 +17,11 @@ for p in p_arr:
                 '#PBS -l walltime=02:00:00\n',  
                 '#PBS -q coc-ice-gpu\n',
                 '#PBS -j oe\n',                 
-                '#PBS -o lightGroup_Out.out\n\n',
+                '#PBS -o ' + filename + 'Out.out\n\n',
 
                 'cd $PBS_O_WORKDIR\n',
 
                 'module load pytorch/1.11.0\n',
-
-                'cd LightGCL\n',
 
                 'python3 main.py --data gowalla --lambda2 0' + '--p ' + p + ' --q_val ' + q
                 ])
@@ -44,13 +42,11 @@ for p in p_arr:
                     '#PBS -l walltime=02:00:00\n',  
                     '#PBS -q coc-ice-gpu\n',
                     '#PBS -j oe\n',                 
-                    '#PBS -o lightGroup_Out.out\n\n',
+                    '#PBS -o ' + filename + 'Out.out\n\n',
 
                     'cd $PBS_O_WORKDIR\n',
 
                     'module load pytorch/1.11.0\n',
-
-                    'cd LightGCL\n',
 
                     'python3 main2.py --data gowalla --lambda2 0' + '--p ' + p + ' --q_val ' + q + ' --restart ' + restart
                     ])
