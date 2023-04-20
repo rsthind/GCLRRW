@@ -18,9 +18,9 @@ def parse_args():
     parser.add_argument('--lambda2', default=1e-7, type=float, help='l2 reg weight')
     parser.add_argument('--cuda', default='0', type=str, help='the gpu to use')
 
-    parser.add_argument('--perc_edges', default=0.9, type=float, help='perc_edges_to_keep')
-    parser.add_argument('--start_nodes', default=5000, type=int, help='num_start_nodes')
-    parser.add_argument('--walk_len', default=4000, type=int, help='walk_length')
+    parser.add_argument('--perc_edges', default=0.5, type=float, help='perc_edges_to_keep')
+    parser.add_argument('--start_nodes', default=500, type=int, help='num_start_nodes')
+    parser.add_argument('--walk_len', default=100, type=int, help='walk_length')
     parser.add_argument('--p', default=1.0, type=float, help='p for random walk')
     parser.add_argument('--q_val', default=1.0, type=float, help='q for random walk')
     parser.add_argument('--restart', default=0.001, type=float, help='random walk restart probability random walk')
