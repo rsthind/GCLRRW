@@ -35,9 +35,9 @@ decay = args.decay
 svd_q = args.q
 
 #RW hyperparameters
-perc_edges_to_keep = args.perc_edges 
-num_start_nodes = args.start_nodes
-walk_length = args.walk_len
+perc_edges_to_keep = args.perc_edges #0.9
+num_start_nodes = args.start_nodes #5000
+walk_length = args.walk_len #4000
 p = args.p
 q = args.q_val
 
