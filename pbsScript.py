@@ -8,7 +8,7 @@ restart_arr = [0.001, 0.0005, 0.005]
 #MAIN.PY
 for p in p_arr:
     for q in q_arr:
-        filename = 'lightProject_' + 'p_' + str(p) + 'q_' + str(q)
+        filename = 'lightProject_' + 'p_' + str(p) + 'q_' + str(q) + '.pbs'
         with open(filename, 'w') as fp:
             fp.writelines(['#PBS -N lightGroup\n',      
                 '#PBS -A rthind3\n',             
@@ -33,7 +33,7 @@ for p in p_arr:
 for p in p_arr:
     for q in q_arr:
         for restart in restart_arr:
-            filename = 'lightProject_' + 'p_' + str(p) + 'q_' + str(q)
+            filename = 'lightProject_' + 'p_' + str(p) + 'q_' + str(q) + '.pbs'
             with open(filename, 'w') as fp:
                 fp.writelines(['#PBS -N lightGroup\n',      
                     '#PBS -A rthind3\n',             
