@@ -23,7 +23,7 @@ for p in p_arr:
 
                 'module load pytorch/1.11.0\n',
 
-                'python3 main.py --data gowalla --lambda2 0' + '--p ' + str(p) + ' --q_val ' + str(q)
+                'python3 main.py --data gowalla --lambda2 0' + ' --p ' + str(p) + ' --q_val ' + str(q)
                 ])
         print('Generaged: ', filename)
         os.system('qsub '+filename)
@@ -48,7 +48,7 @@ for p in p_arr:
 
                     'module load pytorch/1.11.0\n',
 
-                    'python3 main2.py --data gowalla --lambda2 0' + '--p ' + str(p) + ' --q_val ' + str(q) + ' --restart ' + str(restart)
+                    'python3 main2.py --data gowalla --lambda2 0' + ' --p ' + str(p) + ' --q_val ' + str(q) + ' --restart ' + str(restart)
                     ])
             print('Generaged: ', filename)
             os.system('qsub '+filename)
