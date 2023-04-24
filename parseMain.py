@@ -77,12 +77,15 @@ def start(args, p, q):
     edge_index = edge_index[:, edge_index[0] < num_users]
     edge_index[1] = edge_index[1] - num_users
     ret = torch.sparse_coo_tensor(edge_index, (torch.ones(edge_index.shape[1]) * (all_edges * perc_edges_to_keep / total_edges)).cuda(), train.shape).coalesce()
-    #print(torch.count_nonzero(ret.values()))
-    values = torch.bernoulli(torch.clamp(ret.values(), max=1))
-    #print(torch.count_nonzero(values))
-    #ret = torch.sparse_coo_tensor(ret.indices(), values, train.shape)
+    # counts = torch.sparse_coo_tensor(edge_index, torch.ones(edge_index.shape[1]).cuda(), train.shape).coalesce()
+    # print(torch.sort(counts.values(), descending=True)[0][999])
+    values = torch.bernoulli(torch.clamp(ret.values(), max=1)).bool()
+    # print(values.size(0))
+    ret_ind = ret.indices()[:, values]
+    values = values[values].type(torch.float32)
+    # print(values.size(0))
 
-    ret_ind = ret.indices().cpu().numpy()
+    ret_ind = ret_ind.cpu().numpy()
     val_np = values.cpu().numpy()
     # normalizing the ret adj matrix
     ret = coo_matrix((val_np, ret_ind), shape=train.shape)
@@ -137,9 +140,9 @@ def start(args, p, q):
     current_lr = lr
 
     for epoch in range(epoch_no):
-        if (epoch+1)%50 == 0:
-            torch.save(model.state_dict(),'saved_model/saved_model_epoch_'+str(epoch)+'.pt')
-            torch.save(optimizer.state_dict(),'saved_model/saved_optim_epoch_'+str(epoch)+'.pt')
+        # if (epoch+1)%50 == 0:
+        #     torch.save(model.state_dict(),'saved_model/saved_model_epoch_'+str(epoch)+'.pt')
+        #     torch.save(optimizer.state_dict(),'saved_model/saved_optim_epoch_'+str(epoch)+'.pt')
 
         epoch_loss = 0
         epoch_loss_r = 0
@@ -251,7 +254,7 @@ def start(args, p, q):
         'ndcg@40':ndcg_40_y
     })
     current_t = time.gmtime()
-    metric.to_csv('log/result_'+ 'p_' + p + '_q_' + q + '_' + args.data +'_'+time.strftime('%Y-%m-%d-%H',current_t)+'.csv')
+    metric.to_csv('log/result_'+ 'p_' + str(p) + '_q_' + str(q) + '_' + args.data +'_'+time.strftime('%Y-%m-%d-%H',current_t)+'.csv')
 
     #torch.save(model.state_dict(),'saved_model/saved_model_'+ args.data +'_'+time.strftime('%Y-%m-%d-%H',current_t)+'.pt')
     #torch.save(optimizer.state_dict(),'saved_model/saved_optim_'+ args.data +'_'+time.strftime('%Y-%m-%d-%H',current_t)+'.pt')

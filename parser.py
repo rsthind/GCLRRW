@@ -12,12 +12,11 @@ def parse_args():
     parser.add_argument('--d', default=64, type=int, help='embedding size')
     parser.add_argument('--q', default=5, type=int, help='rank')
     parser.add_argument('--gnn_layer', default=2, type=int, help='number of gnn layers')
-    parser.add_argument('--data', default='yelp', type=str, help='name of dataset')
+    parser.add_argument('--data', default='gowalla', type=str, help='name of dataset')
     parser.add_argument('--dropout', default=0.0, type=float, help='rate for edge dropout')
     parser.add_argument('--temp', default=0.2, type=float, help='temperature in cl loss')
     parser.add_argument('--lambda2', default=1e-7, type=float, help='l2 reg weight')
     parser.add_argument('--cuda', default='0', type=str, help='the gpu to use')
-
     parser.add_argument('--perc_edges', default=0.5, type=float, help='perc_edges_to_keep')
     parser.add_argument('--start_nodes', default=500, type=int, help='num_start_nodes')
     parser.add_argument('--walk_len', default=100, type=int, help='walk_length')
